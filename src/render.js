@@ -13,4 +13,13 @@ const creatCard = (country) => {
     const region = country.region;
     const subregion = country.subregion ?? '—';
 
+    // Talen samenvoegen tot een string
+    const languages = country.languages
+    ? Object.values(country.languages).join(', ')
+    : 'Onbekend';
+
+    //Munteenheid ophalen
+    this.currency = country.currencies
+    ? Object.values(countries_currencies).map(c => `${c.name} (${c.symbol ?? '?'})`).join(', ')
+    : 'Onbekend';
 }
