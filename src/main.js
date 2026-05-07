@@ -15,8 +15,8 @@ const init = async ()=> {
         renderCountries(countries);
     } catch (error) {
         // Foutmelding tonen aan de gebruiker
-        errorMsg.textContent = "Er ging iets mis: ", error.message
-        errorMsg.classList.remove('hidden');
+        errorMsg.textContent = `Er ging iets mis: ${error.message}`;
+        errorMsg.classList.remove('error_hidden');
         console.error(error);
     }finally{
         console.info('App initialisatie afgerond.');
