@@ -12,5 +12,7 @@ const fetchCountries = async () => {
         console.log("Data geladen uit cache");
         return JSON.parse(cached); // Zet tekst om naar echte data en return
     }
-
+    // Als er geen cache is, halen we data op via de API
+    const response = await fetch(API_URL);
+    
 }
