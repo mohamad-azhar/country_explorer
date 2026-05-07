@@ -8,7 +8,7 @@ const errorMsg = document.getElementById('error_msg');
 // Zoekt in de HTML naar het element met id "error-msg" om fouten te tonen
 
 // App initialiseren
-const init = async => {
+const init = async ()=> {
     // Definieert een async functie die de app opstart
     try {
         const countries = await fetchCountries();
