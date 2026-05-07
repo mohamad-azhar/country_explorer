@@ -7,7 +7,9 @@ const grid = document.getElementById('countries_grid');
 // Class die één landenkaartje voorstelt
 class CountryCard {
 
+    // Constructor = wordt uitgevoerd wanneer je een nieuw land maakt
     constructor(country) {
+
         this.name = country.name.common;
         this.flag = country.flags.svg;
         this.capital = country.capital?.[0] ?? 'Onbekend';
@@ -15,27 +17,47 @@ class CountryCard {
         this.area = country.area ? country.area.toLocaleString('nl-BE') + ' km²' : 'Onbekend';
         this.region = country.region;
         this.subregion = country.subregion ?? '—';
+
+
+        // Unieke code van het land
         this.cca3 = country.cca3
 
         // Talen samenvoegen tot een string
+        // Controleert of het land een "languages" eigenschap heeft
         const languages = country.languages
+            // Als er talen zijn:
+            // pak alle waarden (bijv. "French", "German")
+            // en plak ze samen met een komma en spatie ertussen
             ? Object.values(country.languages).join(', ')
+            // Als er geen talen zijn:
+            // geef "Onbekend" terug
             : 'Onbekend';
 
         //Munteenheid ophalen
+        // Controleert of het land currencies (munten) heeft
         this.currency = country.currencies
-            ? Object.values(countries_currencies).map(c => `${c.name} (${c.symbol ?? '?'})`).join(', ')
+            // Zet elke currency om naar tekst:
+            // bv. "Euro (€)" of "Dollar ($)"
+            ? Object.values(countries_currencies).map(c => `${c.name} (${c.symbol ?? '?'})`).join(', ') // join Plakt meerdere currencies samen met ", "
+            // Als er geen currencies zijn
+
             : 'Onbekend';
     }
 
     // Bouwt het HTML-element op en geeft het terug
     render() {
+        // Maakt een nieuw div-element aan
         const card = document.createElement("div");
+        // Geeft het een CSS class zodat je het kan stylen
         card.classList.add('country_card')
+        // Slaat de landcode op in een data-attribute (voor later gebruik)
         card.dataset.cca3 = this.cca3
 
+        // Zet de volledige HTML inhoud van de kaart
         card.innerHTML = `
+        
       <img src="${this.flag}" alt="Vlag van ${this.name}" />
+      
       <div class="card-info">
         <h2>${this.name}</h2>
         <table class="card-table">
@@ -55,5 +77,34 @@ class CountryCard {
     }
 }
 
+// Rendert een lijst van landen in het grid
+const renderCountries = async (countries) => {
+    try {
+        // Maakt de grid leeg voordat nieuwe landen worden toegevoegd
+        grid.innerHTML = '';
+
+        // Als er geen landen zijn
+
+        if (countries.length === 0) {
+            grid.innerHTML = '<p class="no-results">Geen landen gevonden.</p>';
+            return;
+        }
+        // Voor elk land een kaartje aanmaken en toevoegen
+        countries.array.forEach(country => {
+            // Maakt een nieuw CountryCard object
+            const card = new CountryCard(country);
+            // Zet de HTML van die kaart in de grid
+            grid.appendChild(card.render());
+        });
+    } catch (error) {
+        // Als er iets fout gaat, toon error in console
+        console.error('Fout bij het renderen van landen: ', error.message)
+        // Toon foutmelding op de pagina
+        grid.innerHTML = '<p class="no-results">Er ging iets mis bij het laden van de landen.</p>';
+    }
+}
 
 
+
+
+export { renderCountries };
