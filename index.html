@@ -1,13 +1,84 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>country_explorer</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>country_explorer</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1>Country Explorer</h1>
+
+    <button id="theme_toggle">Dark Mode</button>
+    <!-- Knop om dark mode aan/uit te zetten -->
+
+  </header>
+
+  <section class="controls">
+    <!-- Deel met filters en zoekfuncties -->
+
+
+    <input type="text" id="search" placeholder="Zoek een land...">
+    <!-- Zoekbalk om landen te zoeken -->
+
+    <select id="filter_region">
+      <!-- Dropdown om regio te kiezen -->
+      <option value="">Alle regio's</option>
+      <option value="Africa">Afrika</option>
+      <option value="Asia">Azië</option>
+      <option value="Europe">Europa</option>
+      <option value="Americas">Amerika</option>
+      <option value="Oceania">Oceania</option>
+    </select>
+
+
+    <select id="sort">
+      <!-- Dropdown om te sorteren -->
+      <option value="name_desc">Naam A -> Z</option>
+      <option value="name_asc">Naam Z -> A</option>
+      <option value="pop_desc">Bevolking (groot -> klein)</option>
+      <option value="pop_asc">Bevolking (klein-> groot)</option>
+      <option value="area_desc">Oppervlakte (groot -> klein) </option>
+    </select>
+
+    <button id="show_favourites">Favorieten</button>
+    <!-- Knop om favoriete landen te tonen -->
+
+  </section>
+
+
+  <!-- FOUTMELDING (verborgen) -->
+  <p id="error_msg" class="error_hidden"></p>
+  <!-- Hier komen errors, maar standaard verborgen -->
+
+
+
+  <!-- LANDEN ZONE -->
+  <main id="countries_grid" class="countries_grid">
+    <!-- kaartjes komen hier via js  -->
+  </main>
+
+  <div id="modal_overlay" class="modal_overlay_hidden">
+    <!-- Donkere achtergrond + popup, standaard verborgen -->
+    <div class="modal">
+      <!-- Het witte popup venster -->
+      <button id="modal_close">X</button>
+      <!-- Knop om popup te sluiten -->
+      <div id="modal_content"></div>
+      <!-- Hier komt info van het gekozen land -->
+
+    </div>
+  </div>
+
+
+
+
+
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
