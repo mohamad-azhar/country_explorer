@@ -1,4 +1,4 @@
-'use sttrict';
+'use strict';
 
 // Haalt de container op waar de kaartjes in komen
 const grid = document.getElementById('countries_grid');
