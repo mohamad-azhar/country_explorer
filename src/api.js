@@ -14,20 +14,25 @@ const fetchCountries = async () => {
     }
     // Als er geen cache is, halen we data op via de API
     const response = await fetch(API_URL);
-    
+
     // Controleer of de request gelukt is
-    if(!response.ok){
-        throw new Error ("API fout", response.status);
+    if (!response.ok) {
+        throw new Error("API fout", response.status); // Stop en toon fout
     }
 
+
+    // Zet de ontvangen data om naar bruikbare JavaScript objecten
     const data = await response.json();
 
-      // Data opslaan in localStorage als cache
+    // Sla de data op in localStorage zodat we ze later sneller kunnen laden
     localStorage.setItem("countries_cache", JSON.stringify(data));
     console.log(data.length, ' landen opgehaald van de API');
 
+
+    // Geef de landen terug aan de rest van de app
     return data;
 
 }
 
-export {fetchCountries};
+// Maak deze functie beschikbaar voor andere bestanden (bv. main.js)
+export { fetchCountries };
