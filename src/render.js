@@ -38,7 +38,7 @@ class CountryCard {
         this.currency = country.currencies
             // Zet elke currency om naar tekst:
             // bv. "Euro (€)" of "Dollar ($)"
-            ? Object.values(countries_currencies).map(c => `${c.name} (${c.symbol ?? '?'})`).join(', ') // join Plakt meerdere currencies samen met ", "
+            ? Object.values(country.currencies).map(c => `${c.name} (${c.symbol ?? '?'})`).join(', ') // join Plakt meerdere currencies samen met ", "
             // Als er geen currencies zijn
 
             : 'Onbekend';
@@ -90,7 +90,7 @@ const renderCountries = async (countries) => {
             return;
         }
         // Voor elk land een kaartje aanmaken en toevoegen
-        countries.array.forEach(country => {
+        countries.forEach(country => {
             // Maakt een nieuw CountryCard object
             const card = new CountryCard(country);
             // Zet de HTML van die kaart in de grid

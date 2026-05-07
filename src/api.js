@@ -17,7 +17,7 @@ const fetchCountries = async () => {
 
     // Controleer of de request gelukt is
     if (!response.ok) {
-        throw new Error("API fout", response.status); // Stop en toon fout
+        throw new Error(`API fout: ${response.status}`); // Stop en toon fout
     }
 
 
@@ -32,6 +32,7 @@ const fetchCountries = async () => {
     // Geef de landen terug aan de rest van de app
     return data;
 
+    
 }
 
 // Maak deze functie beschikbaar voor andere bestanden (bv. main.js)
