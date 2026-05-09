@@ -48,6 +48,7 @@ const applyFilters = (countries) => {
             if (sortValue === 'area_desc') {
                 return (b.area ?? 0) - (a.area ?? 0);
             }
+            return 0;
         });
         // Geeft de gefilterde en gesorteerde lijst terug
         return result;
