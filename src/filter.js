@@ -43,10 +43,13 @@ const applyFilters = (countries) => {
             if (sortValue === 'area_desc') {
                 return (b.area ?? 0) - (a.area ?? 0);
             }
-        })
+        });
+        return result;
 
 
     } catch (error) {
+        console.error(`Fout bij het filteren van landen: ${error.message}`);
+        return countries;
 
     }
 }
