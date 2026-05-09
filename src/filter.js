@@ -62,3 +62,7 @@ const applyFilters = (countries) => {
 
     }
 }
+
+
+
+export {applyFilters};
