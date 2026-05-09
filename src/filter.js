@@ -10,7 +10,7 @@ const applyFilters = (countries) => {
         const sortValue = document.getElementById('sort').value;
 
         // Validatie: zoekterm mag niet korter zijn dan 2 tekens (tenzij leeg)
-        if(searchValue.length === 1){
+        if (searchValue.length === 1) {
             return countries; //nog niet filtreren bij een karakter
         }
 
@@ -20,6 +20,30 @@ const applyFilters = (countries) => {
             return name.includes(searchValue);
         })
 
+        //filtreren op regio
+        if (regionValue !== '') {
+            result = result.filter(country => country.region === regionValue);
+        }
+
+
+        // sorteren
+        result = result.sort((a, b) => {
+            if (sortValue === 'name_asc') {
+                return a.name.common.localeCompare(b.name.common);
+            }
+            if (sortValue === 'name_desc') {
+                return b.name.common.localeCompare(a.name.common);
+            }
+            if (sortValue === 'pop_desc') {
+                return b.population - a.population;
+            }
+            if (sortValue === 'pop_asc') {
+                return a.population -b.population
+            }
+            if (sortValue === 'area_desc') {
+                return (b.area ?? 0) - (a.area ?? 0);
+            }
+        })
 
 
     } catch (error) {
