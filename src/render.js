@@ -1,6 +1,6 @@
 'use strict';
 
-import { isFavourite, toggleFavourites } from './favourite.js';
+import { isFavourite, toggleFavourite } from './favourite.js';
 
 
 // Haalt de container op waar de kaartjes in komen
