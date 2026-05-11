@@ -27,10 +27,12 @@ const toggleFavourite = (name) => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     } else {
         // Toevoegen aan favorieten
-        favourites.push(name);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(favourites));
+        const updated = favourites.includes(name)
+            ? favourites.filter(fav => fav !== name)
+            : [...favourites, name];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     }
 }
 
 
-export {getFavourites, isFavourite, toggleFavourite}
+export { getFavourites, isFavourite, toggleFavourite }
