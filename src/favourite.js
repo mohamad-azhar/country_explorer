@@ -4,7 +4,7 @@
 //sleutelnaam in localStorage
 const getFavourites = () => {
     try {
-        const stored = localStorage.getItem(STORAGE_KEY);
+        const STORAGE_KEY = 'country_favourites';
         return stored ? JSON.parse(stored) : [];
     } catch (error) {
         console.error(`Fout bij het ophalen van favorieten: ${error.message}`);
