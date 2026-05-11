@@ -10,4 +10,3 @@ const loadTheme = () =>{
         themeToggle.textContent = 'Light mode';
     }
 }
-
