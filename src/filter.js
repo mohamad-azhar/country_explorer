@@ -5,7 +5,7 @@
 const applyFilters = (countries) => {
     try {
         // Waarden ophalen uit de UI elementen
-        const searchValue = document.getElementById('search').value.toLowercase().trim(); //zet alles om naar kleine letters en verwijdert spaties voor/achteraan
+        const searchValue = document.getElementById('search').value.toLowerCase().trim(); //zet alles om naar kleine letters en verwijdert spaties voor/achteraan
         const regionValue = document.getElementById('filter_region').value;
         const sortValue = document.getElementById('sort').value;
 
@@ -18,7 +18,7 @@ const applyFilters = (countries) => {
         //filtreren op zoekterm
         let result = countries.filter(country => {
             // Naam van het land in kleine letters zetten
-            const name = country.name.common.toLowercase();
+            const name = country.name.common.toLowerCase();
             // Controleert of de zoekterm voorkomt in de naam
             return name.includes(searchValue);
         })
