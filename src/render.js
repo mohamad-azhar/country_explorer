@@ -1,5 +1,8 @@
 'use strict';
 
+import { isFavourite, toggleFavourites } from './favourite.js';
+
+
 // Haalt de container op waar de kaartjes in komen
 const grid = document.getElementById('countries_grid');
 
@@ -19,19 +22,15 @@ class CountryCard {
         this.subregion = country.subregion ?? '—';
 
 
+        
+        // Talen samenvoegen tot een string
+        this.languages = country.languages
+            ? Object.values(country.languages).join(', ')
+            : "Onbekend";
+
         // Unieke code van het land
         this.cca3 = country.cca3
 
-        // Talen samenvoegen tot een string
-        // Controleert of het land een "languages" eigenschap heeft
-        const languages = country.languages
-            // Als er talen zijn:
-            // pak alle waarden (bijv. "French", "German")
-            // en plak ze samen met een komma en spatie ertussen
-            ? Object.values(country.languages).join(', ')
-            // Als er geen talen zijn:
-            // geef "Onbekend" terug
-            : 'Onbekend';
 
         //Munteenheid ophalen
         // Controleert of het land currencies (munten) heeft
@@ -42,7 +41,11 @@ class CountryCard {
             // Als er geen currencies zijn
 
             : 'Onbekend';
+        //favorietstatus checken
+        this.fav = isFavourite(this.name);
     }
+
+
 
     // Bouwt het HTML-element op en geeft het terug
     render() {
@@ -69,7 +72,9 @@ class CountryCard {
           <tr><th>Talen</th><td>${this.languages}</td></tr>
           <tr><th>Munt</th><td>${this.currency}</td></tr>
         </table>
-        <button class="fav-btn" data-name="${this.name}">Favoriet</button>
+        <button class="fav-btn ${this.fav ? 'active' : ''}" data-name="${this.name}">
+            ${this.fav ? '❤️Opgeslagen' : '🤍Favoriet'}
+        </button>
       </div>
     `;
 
