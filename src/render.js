@@ -22,7 +22,7 @@ class CountryCard {
         this.subregion = country.subregion ?? '—';
 
 
-        
+
         // Talen samenvoegen tot een string
         this.languages = country.languages
             ? Object.values(country.languages).join(', ')
@@ -72,8 +72,8 @@ class CountryCard {
           <tr><th>Talen</th><td>${this.languages}</td></tr>
           <tr><th>Munt</th><td>${this.currency}</td></tr>
         </table>
-        <button class="fav-btn ${this.fav ? 'active' : ''}" data-name="${this.name}">
-            ${this.fav ? '❤️Opgeslagen' : '🤍Favoriet'}
+        <button class="fav_btn ${this.fav ? 'active' : ''}" data-name="${this.name}">
+            ${this.fav ? '❤️ Opgeslagen' : '🤍 Favoriet'}
         </button>
       </div>
     `;
