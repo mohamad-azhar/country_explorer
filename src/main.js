@@ -1,9 +1,9 @@
 'use strict'
 import { fetchCountries } from './api.js' // Haalt de functie fetchCountries binnen uit api.js (data ophalen)
 import { renderCountries } from './render.js' // Haalt de functie renderCountries binnen uit render.js (weergave op scherm)
-import { applyFilters } from './filter.js' 
-import { getFavourites, toggleFavourite } from './favourite.js' 
-import { initTheme } from './theme.js' 
+import { applyFilters } from './filter.js'
+import { getFavourites, toggleFavourite } from './favourite.js'
+import { initTheme } from './theme.js'
 
 
 // Foutmelding element
@@ -20,8 +20,63 @@ const grid = document.getElementById('countries_grid');
 let allCountries = [];
 let showingFavourites = false;
 
+// Filters toepassen en opnieuw renderen
+const update = () => {
+    const source = showingFavourites
+        ? allCountries.filter(c => getFavourites().includes(c.name.common))
+        : allCountries;
+
+    const filtered = applyFilters(source);
+    renderCountries(filtered);
+    attachFavouriteEvents();
+}
+
+// Klik events op favoriet-knoppen koppelen (na elke render opnieuw)
+const attachFavouriteEvents = () => {
+    document.querySelectorAll('.fav_btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const name = e.target.dataset.name;
+            toggleFavourite(name);
+            update();
+        })
+    })
+}
+
+// Favorieten-knop toggle
+showFavBtn.addEventListener('click', ()=> {
+    showingFavourites = !showingFavourites;
+    showFavBtn.textContent = showingFavourites ? '🌍 Alle landen' : '❤️ Favorieten';
+    update();
+})
+
+// Zoeken
+searchInput.addEventListener('input', ()=> update());
+
+// Filteren op regio
+regionSelect.addEventListener('change', ()=> update())
+
+// sorteren
+sortSelect.addEventListener('change', ()=> update());
+
+// Observer API — lazy loading van kaartjes
+const observeCards = () => {
+    const observer = new IntersectionObserver((entries) =>{
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // stoppen na eerste keer
+            }
+        })
+    }, {threshold: 0.1});
+    document.querySelectorAll('.country_card').forEach(card => {
+        observer.observe(card);
+    })
+}
+
+
+
 // App initialiseren
-const init = async ()=> {
+const init = async () => {
     // Definieert een async functie die de app opstart
     try {
         const countries = await fetchCountries();
@@ -31,11 +86,11 @@ const init = async ()=> {
         errorMsg.textContent = `Er ging iets mis: ${error.message}`;
         errorMsg.classList.remove('error_hidden');
         console.error(error);
-    }finally{
+    } finally {
         console.info('App initialisatie afgerond.');
     }
 
 }
-window.addEventListener('load', ()=>{
+window.addEventListener('load', () => {
     init();
 })
