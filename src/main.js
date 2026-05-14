@@ -43,31 +43,31 @@ const attachFavouriteEvents = () => {
 }
 
 // Favorieten-knop toggle
-showFavBtn.addEventListener('click', ()=> {
+showFavBtn.addEventListener('click', () => {
     showingFavourites = !showingFavourites;
     showFavBtn.textContent = showingFavourites ? '🌍 Alle landen' : '❤️ Favorieten';
     update();
 })
 
 // Zoeken
-searchInput.addEventListener('input', ()=> update());
+searchInput.addEventListener('input', () => update());
 
 // Filteren op regio
-regionSelect.addEventListener('change', ()=> update())
+regionSelect.addEventListener('change', () => update())
 
 // sorteren
-sortSelect.addEventListener('change', ()=> update());
+sortSelect.addEventListener('change', () => update());
 
 // Observer API — lazy loading van kaartjes
 const observeCards = () => {
-    const observer = new IntersectionObserver((entries) =>{
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if(entry.isIntersecting){
+            if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
                 observer.unobserve(entry.target); // stoppen na eerste keer
             }
         })
-    }, {threshold: 0.1});
+    }, { threshold: 0.1 });
     document.querySelectorAll('.country_card').forEach(card => {
         observer.observe(card);
     })
@@ -78,17 +78,19 @@ const observeCards = () => {
 // App initialiseren
 const init = async () => {
     // Definieert een async functie die de app opstart
+    initTheme();
     try {
-        const countries = await fetchCountries();
-        renderCountries(countries);
+        allCountries = await fetchCountries();// globale variabele vullen
+        update();
+        observeCards();
     } catch (error) {
-        // Foutmelding tonen aan de gebruiker
         errorMsg.textContent = `Er ging iets mis: ${error.message}`;
         errorMsg.classList.remove('error_hidden');
         console.error(error);
     } finally {
         console.info('App initialisatie afgerond.');
     }
+
 
 }
 window.addEventListener('load', () => {
