@@ -33,10 +33,10 @@ const applyFilters = (countries) => {
 
         // sorteren
         result = result.sort((a, b) => {
-            if (sortValue === 'name_asc') {
+            if (sortValue === 'name_desc') {
                 return a.name.common.localeCompare(b.name.common);
             }
-            if (sortValue === 'name_desc') {
+            if (sortValue === 'name_asc') {
                 return b.name.common.localeCompare(a.name.common);
             }
             if (sortValue === 'pop_desc') {
