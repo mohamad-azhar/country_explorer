@@ -1,10 +1,11 @@
 'use strict';
 
+const STORAGE_KEY = 'country_favourites';
 
 //sleutelnaam in localStorage
 const getFavourites = () => {
     try {
-        const STORAGE_KEY = 'country_favourites';
+        const stored = localStorage.getItem(STORAGE_KEY);
         return stored ? JSON.parse(stored) : [];
     } catch (error) {
         console.error(`Fout bij het ophalen van favorieten: ${error.message}`);
@@ -20,18 +21,19 @@ const isFavourite = (name) => {
 
 // Favoriet toevoegen of verwijderen (toggle)
 const toggleFavourite = (name) => {
-    const favourites = getFavourites();
-    if (favourites.includes(name)) {
-        // Verwijderen uit favorieten
-        const updated = favourites.filter(fav => fav !== name);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    } else {
-        // Toevoegen aan favorieten
+
+    try {
+        const favourites = getFavourites();
         const updated = favourites.includes(name)
             ? favourites.filter(fav => fav !== name)
             : [...favourites, name];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    } catch (error) {
+        console.error(`Fout bij het opslaan van favorieten: ${error.message}`);
     }
+
+
+
 }
 
 
