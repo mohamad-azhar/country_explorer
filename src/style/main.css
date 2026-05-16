@@ -1,0 +1,50 @@
+/*BASIS VARIABELEN*/
+:root {
+    --bg: #f5f5f5;
+    --surface: #ffffff;
+    --text: #222222;
+    --text-muted: #666666;
+    --accent: #2b7a78;
+    --border: #dddddd;
+}
+
+/*Dark mode variabele*/
+body.dark {
+  --bg: #1a1a2e;
+  --surface: #16213e;
+  --text: #e0e0e0;
+  --text-muted: #aaaaaa;
+  --accent: #3fc1c9;
+  --border: #333355;
+}
+
+*{
+    margin : 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background-color: f5f5f5;
+    color : 222222;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+}
+
+/*  HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--surface);
+  border-bottom: 2px solid var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  color: var(--accent);
+}
