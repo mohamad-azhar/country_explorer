@@ -94,3 +94,43 @@ body{
     outline: none;
     border-color: var(--accent);
 }
+
+
+/*Favorieten knop*/
+
+#show_favourites{
+    padding: 0.6rem 1.2rem;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease;
+}
+
+
+#show_favourites:hover {
+  opacity: 0.85;
+}
+
+/*  FOUTMELDING  */
+.error {
+  color: #e74c3c;
+  text-align: center;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.error_hidden {
+  display: none;
+}
+
+/* GEEN RESULTATEN  */
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  width: 100%;
+}
