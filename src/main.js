@@ -29,6 +29,7 @@ const update = () => {
     const filtered = applyFilters(source);
     renderCountries(filtered);
     attachFavouriteEvents();
+    observeCards();
 }
 
 // Klik events op favoriet-knoppen koppelen (na elke render opnieuw)
