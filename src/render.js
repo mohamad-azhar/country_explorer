@@ -58,25 +58,11 @@ class CountryCard {
 
         // Zet de volledige HTML inhoud van de kaart
         card.innerHTML = `
-        
-      <img src="${this.flag}" alt="Vlag van ${this.name}" />
-      
-      <div class="card_info">
-        <h2>${this.name}</h2>
-        <table class="card_table">
-          <tr><th>Hoofdstad</th><td>${this.capital}</td></tr>
-          <tr><th>Bevolking</th><td>${this.population}</td></tr>
-          <tr><th>Oppervlakte</th><td>${this.area}</td></tr>
-          <tr><th>Regio</th><td>${this.region}</td></tr>
-          <tr><th>Subregio</th><td>${this.subregion}</td></tr>
-          <tr><th>Talen</th><td>${this.languages}</td></tr>
-          <tr><th>Munt</th><td>${this.currency}</td></tr>
-        </table>
-        <button class="fav_btn ${this.fav ? 'active' : ''}" data-name="${this.name}">
-            ${this.fav ? '❤️ Opgeslagen' : '🤍 Favoriet'}
-        </button>
-      </div>
-    `;
+  <img src="${this.flag}" alt="Vlag van ${this.name}" />
+  <div class="card_info">
+    <h2>${this.name}</h2>
+  </div>
+`;
 
         return card;
     }
