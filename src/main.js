@@ -62,6 +62,13 @@ const openModal = (country) => {
         </div>
     `;
     modalOverlay.classList.add('active');
+
+    modalContent.querySelector('.fav_btn').addEventListener('click', (e) => {
+        const name = e.target.dataset.name;
+        toggleFavourite(name);
+        update();
+        openModal(country);
+    });
 }
 
 // Modal sluiten
