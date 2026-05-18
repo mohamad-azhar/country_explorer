@@ -61,9 +61,9 @@ class CountryCard {
         
       <img src="${this.flag}" alt="Vlag van ${this.name}" />
       
-      <div class="card-info">
+      <div class="card_info">
         <h2>${this.name}</h2>
-        <table class="card-table">
+        <table class="card_table">
           <tr><th>Hoofdstad</th><td>${this.capital}</td></tr>
           <tr><th>Bevolking</th><td>${this.population}</td></tr>
           <tr><th>Oppervlakte</th><td>${this.area}</td></tr>
