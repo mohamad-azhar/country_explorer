@@ -1,0 +1,102 @@
+/*  OVERLAY — donkere achtergrond achter de modal  */
+.modal_overlay {
+  position: fixed; /* blijft op zijn plaats ook als je scrollt */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* half transparant zwart */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* altijd bovenop alles */
+}
+
+/*  HET MODAL VENSTER ZELF  */
+.modal {
+  background-color: var(--surface);
+  color: var(--text);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh; /* niet hoger dan 85% van het scherm */
+  overflow-y: auto; /* scroll als inhoud te lang is */
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalIn 0.3s ease; /* inkomst animatie */
+}
+
+/*  ANIMATIE — modal komt van onderaf  */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*  SLUIT KNOP  */
+#modal_close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 1rem;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#modal_close:hover {
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+  color: white;
+}
+
+/*  INHOUD VAN DE MODAL  */
+.modal_content_inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal_content_inner img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.modal_content_inner h2 {
+  font-size: 1.8rem;
+  color: var(--accent);
+}
+
+.modal_content_inner p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.modal_content_inner p span {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/*  VERBORGEN KLASSE  */
+.modal_overlay {
+  display: none !important;
+}
+.modal_overlay.active {
+  display: flex !important; /* zichtbaar als active class erbij staat */
+}
+
+    
