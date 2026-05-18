@@ -2,7 +2,7 @@
 import { fetchCountries } from './api.js' // Haalt de functie fetchCountries binnen uit api.js (data ophalen)
 import { renderCountries } from './render.js' // Haalt de functie renderCountries binnen uit render.js (weergave op scherm)
 import { applyFilters } from './filter.js'
-import { getFavourites, toggleFavourite } from './favourite.js'
+import { getFavourites, toggleFavourite, isFavourite } from './favourite.js'
 import { initTheme } from './theme.js'
 
 
@@ -31,13 +31,34 @@ let showingFavourites = false;
 
 // Modal openen
 const openModal = (country) => {
+    const languages = country.languages
+        ? Object.values(country.languages).join(', ')
+        : 'Onbekend';
+
+    const currency = country.currencies
+        ? Object.values(country.currencies).map(c => `${c.name} (${c.symbol ?? '?'})`).join(', ')
+        : 'Onbekend';
+
+    const area = country.area
+        ? country.area.toLocaleString('nl-BE') + ' km²'
+        : 'Onbekend';
+
     modalContent.innerHTML = `
         <div class="modal_content_inner">
             <img src="${country.flags.svg}" alt="Vlag van ${country.name.common}" />
             <h2>${country.name.common}</h2>
-            <p>Hoofdstad: <span>${country.capital?.[0] ?? 'Onbekend'}</span></p>
-            <p>Bevolking: <span>${country.population.toLocaleString('nl-BE')}</span></p>
-            <p>Regio: <span>${country.region}</span></p>
+            <table class="card_table">
+                <tr><th>Hoofdstad</th><td>${country.capital?.[0] ?? 'Onbekend'}</td></tr>
+                <tr><th>Bevolking</th><td>${country.population.toLocaleString('nl-BE')}</td></tr>
+                <tr><th>Oppervlakte</th><td>${area}</td></tr>
+                <tr><th>Regio</th><td>${country.region}</td></tr>
+                <tr><th>Subregio</th><td>${country.subregion ?? '—'}</td></tr>
+                <tr><th>Talen</th><td>${languages}</td></tr>
+                <tr><th>Munt</th><td>${currency}</td></tr>
+            </table>
+            <button class="fav_btn ${isFavourite(country.name.common) ? 'active' : ''}" data-name="${country.name.common}">
+                ${isFavourite(country.name.common) ? '❤️ Opgeslagen' : '🤍 Favoriet'}
+            </button>
         </div>
     `;
     modalOverlay.classList.add('active');
