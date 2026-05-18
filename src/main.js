@@ -15,10 +15,58 @@ const regionSelect = document.getElementById('filter_region');
 const sortSelect = document.getElementById('sort');
 const showFavBtn = document.getElementById('show_favourites');
 const grid = document.getElementById('countries_grid');
+const modalOverlay = document.getElementById('modal_overlay')
+const modalContent = document.getElementById('modal_content')
+const modalClose = document.getElementById('modal_close')
+
+
 
 // Globale variabele om alle landen bij te houden
 let allCountries = [];
 let showingFavourites = false;
+
+
+
+
+
+// Modal openen
+const openModal = (country) => {
+    modalContent.innerHTML = `
+        <div class="modal_content_inner">
+            <img src="${country.flags.svg}" alt="Vlag van ${country.name.common}" />
+            <h2>${country.name.common}</h2>
+            <p>Hoofdstad: <span>${country.capital?.[0] ?? 'Onbekend'}</span></p>
+            <p>Bevolking: <span>${country.population.toLocaleString('nl-BE')}</span></p>
+            <p>Regio: <span>${country.region}</span></p>
+        </div>
+    `;
+    modalOverlay.classList.add('active');
+}
+
+// Modal sluiten
+modalClose.addEventListener('click', () => {
+    modalOverlay.classList.remove('active');
+});
+
+// Sluiten als je buiten de modal klikt
+modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('active');
+    }
+});
+
+
+// Kaar events
+const attachCardEvents = () => {
+    document.querySelectorAll('.country_card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.fav_btn')) return;
+            const cca3 = card.dataset.cca3;
+            const country = allCountries.find(c => c.cca3 === cca3);
+            if (country) openModal(country);
+        });
+    });
+}
 
 // Filters toepassen en opnieuw renderen
 const update = () => {
@@ -29,8 +77,11 @@ const update = () => {
     const filtered = applyFilters(source);
     renderCountries(filtered);
     attachFavouriteEvents();
-    observeCards();
+    attachCardEvents(); // ← nieuw
+    observeCards();;
 }
+
+
 
 // Klik events op favoriet-knoppen koppelen (na elke render opnieuw)
 const attachFavouriteEvents = () => {
