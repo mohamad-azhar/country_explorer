@@ -68,3 +68,32 @@
     padding: 3px 0;
 }
 
+/*  FAVORIET KNOP  */
+.fav_btn {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.fav_btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.fav_btn.active {
+    background-color: #ffe0e0;
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+body.dark .fav_btn.active {
+    background-color: #3a1a1a;
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
