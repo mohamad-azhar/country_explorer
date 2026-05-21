@@ -1,6 +1,6 @@
 # Country Explorer
 Een interactieve single-page applicatie voor het vak Web advanced. 
-Je kan hiermee alle landen van de werled bekijken, filtreren, sorteren en als favoriet opslaan.
+Je kan hiermee alle landen van de wereld bekijken, filteren, sorteren en als favoriet opslaan.
 
 ---
 
@@ -25,7 +25,7 @@ Ik koos voor een landen-applicatie omdat ik het interessant vond om met echte da
 ## Gebruikte API
 ### REST countries v3.1, https://restcountries.com/
 **Gebruikte endpoints**
-https://restcountries.com/v3.1/all?fields=name,flags,capital,population,area,region,subregion,languages,currencies,cca3'
+https://restcountries.com/v3.1/all?fields=name,flags,capital,population,area,region,subregion,languages,currencies,cca3
 
 Gratis, geen API-sleutel nodig. 
 
@@ -65,7 +65,7 @@ countryexplorer/
 
 ## Technische vereisten
 ### DOM manipulatie
-- **ELementen selecteren:** `src/main.js` regel 9 (`document.getElementById` voor alle UI-elementen)   
+- **Elementen selecteren:** `src/main.js` regel 9 (`document.getElementById` voor alle UI-elementen)   
 - **Elementen manipuleren:** `src/render.js` regel 38 (`innerHTML`, `classList`, `appendChild`)
 - **Events koppelen:** `src/main.js` regel 45+ (alle `addEventListener` calls)
 
