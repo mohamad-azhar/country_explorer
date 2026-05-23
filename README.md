@@ -150,4 +150,6 @@ countryexplorer/
 ![alt text](src/assets/image-6.png)
 ![alt text](src/assets/image-7.png)
 ![alt text](src/assets/image-8.png)
-
+![alt text](src/assets/image.png)
+![alt text](src/assets/image-1.png)
+![alt text](src/assets/image-2.png)
